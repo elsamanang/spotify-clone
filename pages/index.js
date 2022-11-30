@@ -11,6 +11,7 @@ export default function Home() {
         <meta name="description" content="My clone of spotify web app" />
         <link rel="icon" href="/icon-black-64.png" />
       </Head>
+      
       <div className="content p-2">
         <div className="flex justify-center p-3 my-2">
             <Image src={'/spotify-icon.png'} width={180} height={55} />
