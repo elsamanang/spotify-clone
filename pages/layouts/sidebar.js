@@ -5,7 +5,7 @@ export default function Sidebar() {
     return(
         <div className="fixed w-[28%] h-full bg-[#000000] p-5">
             <div className="mx-3">
-                <Image src={'/spotify-icon-white.png'} width={130} height={6} />
+                <Image src={'/spotify-icon-white.png'} alt="" width={130} height={6} />
             </div>
             <div className='place-self-start'>
                 <div className='flex my-4'>

@@ -1,7 +1,7 @@
 import {LeftC, RightC, User, DownOne} from '@icon-park/react';
-export default function Navbar() {
+export default function Navbar(props) {
     return(
-        <div className="grid grid-cols-3 text-white pt-2 pb-2 px-6 fixed">
+        <div id='mynav' className={'grid grid-cols-3 mt-[-10px] text-white pt-2 pb-2 px-6 fixed ' + props.color}>
             <div className="col-span-2 flex">
                 <LeftC size='2.5em' className="mx-1" fill={'#000000'} theme="filled"/>
                 <RightC size='2.5em' className="mx-1" fill={'#000000'} theme="filled" />
