@@ -3,6 +3,10 @@ import styles from '../styles/Home.module.css'
 import Navbar from './layouts/navbar'
 import Sidebar from './layouts/sidebar'
 import { useEffect, useState } from 'react'
+import PlayCard from './components/playCard';
+import ArtitsteCard from './components/artisteCard'
+import RadioCard from './components/radioCard'
+import GreetCard from './components/greetCard'
 
 export default function Home() {
 
@@ -35,27 +39,16 @@ export default function Home() {
                     <div className="w-[100%] h-[50px]">
                         <Navbar color={navigColor} />
                     </div>
-                    <div className="text-white">
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>ttt<br/>
-                        tttt<br/>ttt<br/>ttt<br/>ttt
+                    <div className="text-white pt-2 pb-2 px-6">
+                        <div className='flex'>
+                            <GreetCard img='/artiste/a1.jpg' titre='Maluma' />
+                            <GreetCard img='/artiste/a2.jpg' titre='Sia'/>
+                        </div>
+                        <div className='flex'>
+                            <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
+                            <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                        </div>
                     </div>
                 </div>
             </div>
