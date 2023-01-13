@@ -10,23 +10,23 @@ export default function Sidebar() {
             <div className='place-self-start'>
                 <div className='flex my-4'>
                     <Home size='2em' className='mx-3'/>
-                    <h2 className='text-[1.2em]'>Acceuil</h2>
+                    <h2 className='text-[1.1em]'>Acceuil</h2>
                 </div>
                 <div className='flex my-4'>
                     <Search size='2em' className='mx-3'/>
-                    <h2 className='text-[1.2em]'>Recherche</h2>
+                    <h2 className='text-[1.1em]'>Recherche</h2>
                 </div>
                 <div className='flex my-4'>
                     <DistributeHorizontally size='2em' className='mx-3'/>
-                    <h2 className='text-[1.2em]'>Bibliothèque</h2>
+                    <h2 className='text-[1.1em]'>Bibliothèque</h2>
                 </div>
                 <div className='flex my-4 mt-10'>
                     <Add size='2em' fill={'#b3b3b3'} style={{color: 'black'}} className='mx-3' theme={'filled'} />
-                    <h2 className='text-[1.2em]'>Créer une playlist</h2>
+                    <h2 className='text-[1.1em]'>Créer une playlist</h2>
                 </div>
                 <div className='flex my-4'>
                     <Like size='2em' className='mx-3'/>
-                    <h2 className='text-[1.2em]'>Titre likés</h2>
+                    <h2 className='text-[1.1em]'>Titre likés</h2>
                 </div>
             </div>
         </div>

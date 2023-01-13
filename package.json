@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@blueprintjs/core": "^4.12.0",
-    "@headlessui/react": "^1.7.4",
+    "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@icon-park/react": "^1.4.2",
     "next": "13.0.5",
