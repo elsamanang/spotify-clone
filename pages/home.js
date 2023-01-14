@@ -8,6 +8,7 @@ import ArtitsteCard from './components/artisteCard'
 import RadioCard from './components/radioCard'
 import GreetCard from './components/greetCard'
 
+
 export default function Home() {
 
     const [navigColor, setNavigColor] = useState("")
@@ -32,7 +33,7 @@ export default function Home() {
                 <link rel="icon" href="/icon-green-64.png" />
             </Head>
             <div className='flex w-[100%]'>
-                <div className="w-[38%] h-screen p-0 bg-[#000000] text-[#b3b3b3] font-bold">
+                <div className="w-[22%] h-screen p-0 bg-[#000000] text-[#b3b3b3] font-bold">
                     <Sidebar />
                 </div>
                 <div className="w-full p-2 bg-[#191919]">
