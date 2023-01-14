@@ -5,6 +5,7 @@ export default function Navbar(props) {
             <div className="col-span-2 flex">
                 <LeftC size='2.5em' className="mx-1" fill={'#000000'} theme="filled"/>
                 <RightC size='2.5em' className="mx-1" fill={'#000000'} theme="filled" />
+                {props.element}
             </div>
             <div className="flex justify-end">
                 <div className="mx-4">
