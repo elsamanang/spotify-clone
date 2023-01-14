@@ -8,5 +8,6 @@ export default function PlayCard(props) {
             <p className='my-2 text-[16px] font-semibold'>{props.titre}</p>
             <p className='text-[14px] text-[#b3b3b3]'>{props.detail}</p>
         </div>
+
     )
 }

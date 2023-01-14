@@ -8,6 +8,7 @@ import ArtitsteCard from './components/artisteCard'
 import RadioCard from './components/radioCard'
 import GreetCard from './components/greetCard'
 
+
 export default function Home() {
 
     const [navigColor, setNavigColor] = useState("")
@@ -32,7 +33,7 @@ export default function Home() {
                 <link rel="icon" href="/icon-green-64.png" />
             </Head>
             <div className='flex w-[100%]'>
-                <div className="w-[38%] h-screen p-0 bg-[#000000] text-[#b3b3b3] font-bold">
+                <div className="w-[22%] h-screen p-0 bg-[#000000] text-[#b3b3b3] font-bold">
                     <Sidebar />
                 </div>
                 <div className="w-full p-2 bg-[#191919]">
@@ -40,14 +41,97 @@ export default function Home() {
                         <Navbar color={navigColor} />
                     </div>
                     <div className="text-white pt-2 pb-2 px-6">
-                        <div className='flex'>
-                            <GreetCard img='/artiste/a1.jpg' titre='Maluma' />
-                            <GreetCard img='/artiste/a2.jpg' titre='Sia'/>
+                        <div className='grid my-3 mb-8'>
+                            <h3 className='font-bold mx-2 my-2 text-[28px]'>{'Bonjour'}</h3>
+                            <div className='flex'>
+                                <GreetCard img='/artiste/a1.jpg' titre='Maluma' />
+                                <GreetCard img='/artiste/a2.jpg' titre='Sia'/>
+                            </div>
                         </div>
-                        <div className='flex'>
-                            <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                            <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
-                            <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                        <div className='grid my-3'>
+                            <h3 className='font-bold mx-2 my-2 text-[24px]'>{'Conçu pour elsa manang'}</h3>
+                            <div className='flex'>
+                                <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            </div>
+                        </div>
+                        <div className='grid my-3'>
+                            <div className='mx-2 my-2 flex justify-between'>
+                                <p className='font-bold text-[24px]'>{'Les meilleurs auto-compositeurs'}</p>
+                                <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
+                            </div>
+                            <div className='flex'>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            </div>
+                        </div>
+                        <div className='grid my-3'>
+                            <div className='mx-2 my-2 flex justify-between'>
+                                <p className='font-bold text-[24px]'>{'Écoutés récemment'}</p>
+                            </div>
+                            <div className='flex'>
+                                <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Mixe Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
+                            </div>
+                        </div>
+                        <div className='grid my-3'>
+                            <div className='mx-2 my-2 flex justify-between'>
+                                <p className='font-bold text-[24px]'>{'Les classiques'}</p>
+                                <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
+                            </div>
+                            <div className='flex'>
+                                <PlayCard img='/covers/c1.jpg' titre='All Out 80s' detail='The bigest song of 80s'/>
+                                <PlayCard img='/covers/c1.jpg' titre='All Out 90s' detail='The bigest song of 90s'/>
+                                <PlayCard img='/covers/c1.jpg' titre='All Out 70s' detail='The bigest song of 70s'/>
+                                <PlayCard img='/covers/c1.jpg' titre='All Out 2000s' detail='The bigest song of 2000s'/>
+                            </div>
+                        </div>
+                        <div className='grid my-3'>
+                            <div className='mx-2 my-2 flex justify-between'>
+                                <p className='font-bold text-[24px]'>{'Radios populaires'}</p>
+                                <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
+                            </div>
+                            <div className='flex'>
+                                <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                                <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                                <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                                <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                            </div>
+                        </div>
+                        <div className='grid my-3'>
+                            <div className='mx-2 my-2 flex justify-between'>
+                                <p className='font-bold text-[24px]'>{'Radios recommandées'}</p>
+                            </div>
+                            <div className='flex'>
+                                <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                                <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                                <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                            </div>
+                        </div>
+                        <div className='grid my-3'>
+                            <div className='mx-2 my-2 flex justify-between'>
+                                <p className='font-bold text-[24px]'>{'Spotify playlists'}</p>
+                                <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
+                            </div>
+                            <div className='flex'>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            </div>
+                        </div>
+                        <div className='grid my-3'>
+                            <div className='mx-2 my-2 flex justify-between'>
+                                <p className='font-bold text-[24px]'>{'Vos artistes préferés'}</p>
+                            </div>
+                            <div className='flex'>
+                                <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
+                                <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
+                            </div>
                         </div>
                     </div>
                 </div>
