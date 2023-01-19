@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 import Navbar from './layouts/navbar'
 import Sidebar from './layouts/sidebar'
 import { useEffect, useState } from 'react'
-import PlayCard from './components/playCard';
+import PlayCard from './components/playCard'
 import ArtitsteCard from './components/artisteCard'
 import RadioCard from './components/radioCard'
 import GreetCard from './components/greetCard'
@@ -38,7 +38,11 @@ export default function Home() {
                 </div>
                 <div className="w-full p-2 bg-[#191919]">
                     <div className="w-[100%] h-[50px]">
-                        <Navbar color={navigColor} />
+                        <Navbar color={navigColor} sub={
+                            <button className="p-1 w-[100px] rounded-full border border-1 font-bold border-[#878787]">
+                                S'abonner
+                            </button>
+                        } />
                     </div>
                     <div className="text-white pt-2 pb-2 px-6">
                         <div className='grid my-3 mb-8'>

@@ -17,10 +17,10 @@ export default function Sidebar() {
                     <Search size='2em' className='mx-3'/>
                     <h2 className='text-[1em]'>Recherche</h2>
                 </div></Link>
-                <div className='flex my-4'>
+                <Link href='/playlist'><div className='flex my-4'>
                     <DistributeHorizontally size='2em' className='mx-3'/>
                     <h2 className='text-[1em]'>Bibliothèque</h2>
-                </div>
+                </div></Link>
                 <div className='flex my-4 mt-10'>
                     <Add size='2em' fill={'#b3b3b3'} style={{color: 'black'}} className='mx-3' theme={'filled'} />
                     <h2 className='text-[1em]'>Créer une playlist</h2>
