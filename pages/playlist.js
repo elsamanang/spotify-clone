@@ -1,17 +1,13 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Navbar from './layouts/navbar'
 import Sidebar from './layouts/sidebar'
-import { useEffect, useState } from 'react'
 import {Search, Close} from '@icon-park/react'
-import GenreCard from './components/genreCard'
-import PlayCard from './components/playCard';
-import ArtitsteCard from './components/artisteCard'
-import RadioCard from './components/radioCard'
-import GreetCard from './components/greetCard'
+import PlayCard from './components/playCard'
+import LikeCard from './components/likeCard'
 
-export default function Recherche() {
-
+export default function Playlist() {
     const [navigColor, setNavigColor] = useState("");
 
     useEffect(() => {
@@ -39,26 +35,22 @@ export default function Recherche() {
                 </div>
                 <div className="w-full p-2 bg-[#191919]">
                     <div className="w-[100%] h-[50px]">
-                        <Navbar color={navigColor} element={
-                            <div className='mx-5 mt-[3px] flex p-2 text-[#000000] rounded-full bg-white w-[350px]'>
-                                <Search size='1.8em' className='mx-2'/>
-                                <input className='w-[300px] border border-none placeholder-red focus:outline-none' placeholder='Que souhaitez-vous ecouter ?'/>
-                                <Close size='1.8em' className='mx-2'/>
-                            </div>
-                        } />
+                        <Navbar color={navigColor} />
                     </div>
                     <div className="text-white pt-5 pb-2 px-6">
                         <div className='grid my-3'>
                             <div className='mx-2 my-2 flex justify-between'>
-                                <p className='font-bold text-[24px]'>{'Parcourir tout'}</p>
+                                <p className='font-bold text-[24px]'>{'Playlists'}</p>
                             </div>
-                            <div className='grid grid-cols-5 mx-1'>
-                                <GenreCard img='/covers/c2.jpg' titre='Hip-Hop' color='bg-[#313a83]'/>
-                                <GenreCard img='/covers/c1.jpg' titre='Pop' color='bg-[#8f454d]'/>
-                                <GenreCard img='/covers/c2.jpg' titre='Latino' color='bg-[#458F87]'/>
-                                <GenreCard img='/covers/c1.jpg' titre='Afro' color='bg-[#9d67a4]'/>
-                                <GenreCard img='/covers/c2.jpg' titre='Rap' color='bg-[#d9321d]'/>
-                                <GenreCard img='/covers/c1.jpg' titre='Rock' color='bg-[#eba953]'/>
+                            <div className='grid grid-cols-5 grap-4'>
+                                <LikeCard count='8' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
                             </div>
                         </div>
                     </div>
