@@ -16,15 +16,14 @@ export default function Home() {
     const [navigColor, setNavigColor] = useState("")
 
     useEffect(() => {
-        window.onscroll = function () { 
-            document.body.style.scrollbarColor = '#000000 yellow';
-            if (document.body.scrollTop >= 3 || document.documentElement.scrollTop >= 3) {
-                setNavigColor("bg-[#000000]");
-            } 
+        document.getElementById("scrolling").addEventListener("scroll", event => {
+            if(document.getElementById("scrolling").scrollTop >3 ) {
+                setNavigColor("bg-[#252525]");
+            }
             else {
                 setNavigColor("");
             }
-        };
+        });
     }, [])
 
     return(
@@ -35,13 +34,13 @@ export default function Home() {
                 <link rel="icon" href="/icon-green-64.png" />
             </Head>
             <div className='grid w-[100%] bg-[#000000] h-[100vh]'>
-                <div className='flex w-full w-[100%] h-[90vh]'>
-                    <div className="w-[28%] h-screen p-0">
+                <div className='flex w-[100%] h-[90vh]'>
+                    <div className="w-[26%] h-screen p-0">
                         <Sidebar />
                     </div>
-                    <div className="w-[72%] h-[90vh] p-2">
-                        <div className='grid max-h-[88vh] bg-[#191919] rounded rounded-md overflow-y-scroll'>
-                            <div className="w-[100%] h-[50px] fixed">
+                    <div className="w-[74%] h-[90vh] p-2">
+                        <div id='scrolling' className='grid max-h-[88vh] bg-[#191919] rounded rounded-md overflow-y-scroll'>
+                            <div className="w-[72%] h-[50px] fixed">
                                 <Navbar color={navigColor} sub={
                                     <button className="p-1 w-[100px] rounded-full border border-1 font-bold border-[#878787]">
                                         S'abonner
@@ -49,7 +48,7 @@ export default function Home() {
                                 } />
                             </div>
                             <div className="text-white pt-2 pb-2 px-6 h-full">
-                                <div className='grid my-3 mb-8'>
+                                <div className='grid my-5 mb-8'>
                                     <h3 className='font-bold mx-2 my-2 text-[28px]'>{'Bonjour'}</h3>
                                     <div className='flex'>
                                         <GreetCard img='/artiste/a1.jpg' titre='Maluma' />
