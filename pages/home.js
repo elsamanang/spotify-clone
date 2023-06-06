@@ -18,7 +18,7 @@ export default function Home() {
     useEffect(() => {
         document.getElementById("scrolling").addEventListener("scroll", event => {
             if(document.getElementById("scrolling").scrollTop >3 ) {
-                setNavigColor("bg-[#252525]");
+                setNavigColor("bg-[#191919]");
             }
             else {
                 setNavigColor("");
@@ -42,8 +42,8 @@ export default function Home() {
                         <div id='scrolling' className='grid max-h-[88vh] bg-[#191919] rounded rounded-md overflow-y-scroll'>
                             <div className="w-[72%] h-[50px] fixed">
                                 <Navbar color={navigColor} sub={
-                                    <button className="p-1 w-[100px] rounded-full border border-1 font-bold border-[#878787]">
-                                        S'abonner
+                                    <button className="p-1 w-[120px] rounded-full border border-1 font-bold border-[#878787]">
+                                        Installer l'appli
                                     </button>
                                 } />
                             </div>
