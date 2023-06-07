@@ -42,7 +42,7 @@ export default function Home() {
                         <div id='scrolling' className='grid max-h-[88vh] bg-[#191919] rounded rounded-md overflow-y-scroll'>
                             <div className="w-[72%] h-[50px] fixed">
                                 <Navbar color={navigColor} sub={
-                                    <button className="p-1 w-[120px] rounded-full border border-1 font-bold border-[#878787]">
+                                    <button className="p-1 text-[13px] w-[130px] rounded-full border border-1 font-bold border-[#878787]">
                                         Installer l'appli
                                     </button>
                                 } />

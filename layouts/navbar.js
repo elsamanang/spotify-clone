@@ -1,12 +1,7 @@
 import React, {useState} from "react";
-import {LeftC, RightC, User, DownOne} from '@icon-park/react';
-import {Classes, Popover, Position} from "@blueprintjs/core";
+import {LeftC, RightC, User, DownOne, Logout} from '@icon-park/react';
+import {Menu, Popover} from '@headlessui/react'
 export default function Navbar(props) {
-    const [isOpen, setIsOpen] = useState(false);
-    
-    const handleSetOpen = () => {
-        setIsOpen(!isOpen);
-    }
     
     return(
         <div id='mynav' className={'flex justify-between text-white pt-2 pb-2 px-6 ' + props.color}>
@@ -16,21 +11,31 @@ export default function Navbar(props) {
                 {props.element}
             </div>
             <div className="ml-40 flex justify-end">
-                <div className="m-2">
+                <div className="my-2 mx-1">
                     {props.sub}
                 </div>
-                <Popover position={Position.BOTTOM_LEFT} canEscapeKeyClose={false} minimal={true} className={'bg-[#191919]'}
-                    focus={false} isOpen={isOpen} enforceFocus={false} popoverClassName={Classes.POPOVER_CONTENT_SIZING}
-                    content={
-                        <div className='p-0 grid w-[300px] bg-[#191919] text-white'>
-                            <p>hgf</p>
+                <Menu>
+                    <Menu.Button>
+                        <div className="m-0">
+                            <p className="p-2 mx-2 rounded-full font-bold bg-[#000000]"><User size='1.2em'/></p>
                         </div>
-                    } 
-                >
-                    <div className="m-0" onClick={handleSetOpen}>
-                        <p className="p-2 mx-2 rounded-full font-bold bg-[#000000]"><User size='1.4em'/></p>
-                    </div>
-                </Popover>
+                    </Menu.Button>
+                    <Menu.Items className='absolute grid bg-[#252525] text-[#c2c2c2] text-[14px] font-semibold p-1 rounded rounded-md' style={{marginTop: '55px', width: '205px', marginLeft: '-15px'}}>
+                        <div className='mx-1 w-[95%] p-2 flex justify-between hover:bg-[#3a3a3a]'>
+                            <p>Compte</p>
+                            <Logout className='font-bold' size={20} style={{marginTop: '3px'}} />
+                        </div>
+                        <div className='mx-1 w-[95%] p-2 hover:bg-[#3a3a3a]'>
+                            <p>Profil</p>
+                        </div>
+                        <div className='mx-1 w-[95%] p-2 hover:bg-[#3a3a3a]'>
+                            <p>Préférence</p>
+                        </div>
+                        <div className='mx-1 w-[95%] p-2 hover:bg-[#3a3a3a]' style={{borderTop: 'solid 1px #3a3a3a'}}>
+                            <p>Déconnexion</p>
+                        </div>
+                    </Menu.Items>
+                </Menu>
             </div>
         </div>
     )
