@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Navbar from './layouts/navbar'
-import Sidebar from './layouts/sidebar'
+import Navbar from '../layouts/navbar'
+import Sidebar from '../layouts/sidebar'
 import { useEffect, useState } from 'react'
 import {Search, Close} from '@icon-park/react'
-import GenreCard from './components/genreCard'
-import PlayCard from './components/playCard';
-import ArtitsteCard from './components/artisteCard'
-import RadioCard from './components/radioCard'
-import GreetCard from './components/greetCard'
+import GenreCard from '../components/genreCard'
+import PlayCard from '../components/playCard';
+import ArtitsteCard from '../components/artisteCard'
+import RadioCard from '../components/radioCard'
+import GreetCard from '../components/greetCard'
 
 export default function Recherche() {
 

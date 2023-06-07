@@ -66,9 +66,9 @@ export default function Home() {
                 <h3 className='font-medium mx-2'>Remember me</h3>
               </div>
               <div className='place-self-end'>
-                <button className='bg-[#1ed760] w-[120px] relative top-0 right-0 p-3 text-black font-bold rounded-full border border-1 border-[#1ed760]'>
+                <a href="/home"><button className='bg-[#1ed760] w-[120px] relative top-0 right-0 p-3 text-black font-bold rounded-full border border-1 border-[#1ed760]'>
                   LOG IN
-                </button>
+                </button></a>
               </div>
               <hr className='w-[450px] my-[20px] border border-1'/>
             </div>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Navbar from './layouts/navbar'
-import Sidebar from './layouts/sidebar'
+import Navbar from '../layouts/navbar'
+import Sidebar from '../layouts/sidebar'
 import {Search, Close} from '@icon-park/react'
-import PlayCard from './components/playCard'
-import LikeCard from './components/likeCard'
+import PlayCard from '../components/playCard'
+import LikeCard from '../components/likeCard'
 
 export default function Playlist() {
     const [navigColor, setNavigColor] = useState("");
