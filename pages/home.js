@@ -145,7 +145,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className='bg-white h-[10vh]'>
-                    <Footer />
+                    <Footer img='/artiste/a1.jpg' titre='Sweet but psycho' artist='Ava Max' />
                 </div>
             </div>
         </div>
