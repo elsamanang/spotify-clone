@@ -52,7 +52,7 @@ export default function Recherche() {
                             <div className='mx-2 my-2 flex justify-between'>
                                 <p className='font-bold text-[24px]'>{'Parcourir tout'}</p>
                             </div>
-                            <div className='grid grid-cols-5 mx-1'>
+                            <div className='grid grid-cols-4 mx-1'>
                                 <GenreCard img='/covers/c2.jpg' titre='Hip-Hop' color='bg-[#313a83]'/>
                                 <GenreCard img='/covers/c1.jpg' titre='Pop' color='bg-[#8f454d]'/>
                                 <GenreCard img='/covers/c2.jpg' titre='Latino' color='bg-[#458F87]'/>

@@ -42,7 +42,7 @@ export default function Playlist() {
                             <div className='mx-2 my-2 flex justify-between'>
                                 <p className='font-bold text-[24px]'>{'Playlists'}</p>
                             </div>
-                            <div className='grid grid-cols-5 grap-4'>
+                            <div className='grid grid-cols-4 grap-4'>
                                 <LikeCard count='8' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
                                 <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
                                 <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
