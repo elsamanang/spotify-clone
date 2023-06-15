@@ -39,7 +39,7 @@ export default function Home() {
                         <Sidebar />
                     </div>
                     <div className="w-[74%] h-[90vh] p-2">
-                        <div id='scrolling' className='grid max-h-[88vh] bg-[#191919] rounded rounded-md overflow-y-scroll'>
+                        <div id='scrolling' className='grid max-h-[88vh] bg-[#191919] rounded-md overflow-y-scroll'>
                             <div className="w-[72%] h-[50px] fixed">
                                 <Navbar color={navigColor} sub={
                                     <button className="p-1 text-[13px] w-[130px] rounded-full border border-1 font-bold border-[#878787]">
@@ -145,7 +145,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className='bg-white h-[10vh]'>
-                    <Footer />
+                    <Footer img='/artiste/a1.jpg' titre='Sweet but psycho' artist='Ava Max' />
                 </div>
             </div>
         </div>
