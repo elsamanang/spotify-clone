@@ -1,4 +1,4 @@
-import Head from 'next/head'
+
 import styles from '../styles/Home.module.css'
 import Navbar from '../layouts/navbar'
 import Sidebar from '../layouts/sidebar'
@@ -27,18 +27,18 @@ export default function Home() {
     }, [])
 
     return(
-    
+        
         <div className='grid w-[100%] bg-[#000000] h-[100vh]'>
             <div className='flex w-[100%] h-[90vh]'>
                 <div className="w-[26%] h-screen p-0">
                     <Sidebar />
                 </div>
-                <div className="w-[74%] h-[90vh] p-2">
-                    <div id='scrolling' className='grid max-h-[88vh] bg-[#191919] rounded-md overflow-y-scroll'>
+                <div className="w-[74%] h-[90vh] p-1">
+                    <div id='scrolling' className='grid mt-1 p-2 max-h-[88vh] bg-[#191919] rounded-md overflow-y-scroll'>
                         <div className="w-[72%] h-[50px] fixed">
                             <Navbar color={navigColor} sub={
                                 <button className="p-1 text-[13px] w-[130px] rounded-full border border-1 font-bold border-[#878787]">
-                                    <i className="fa-regular fa-circle-arrow-down mx-1"></i><span> Installer l'appli </span>
+                                    <i className="fa-solid fa-circle-arrow-down"></i><span> Installer l'appli </span>
                                 </button>
                             } />
                         </div>

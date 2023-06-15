@@ -1,12 +1,11 @@
 import '../styles/globals.css'
-
 import '@icon-park/react/styles/index.css'
-import styles from "../styles/Home.module.css";
 import Head from "next/head";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
   return (
-      <div className={styles.container}>
+      <div className="contents">
           <Head>
               <title>Spotify-clone | Home</title>
               <meta name="description" content="My clone of spotify web app" />
@@ -15,18 +14,22 @@ function MyApp({ Component, pageProps }) {
               <link rel="stylesheet" href="/css/all.min.css"/>
               <link rel="stylesheet" href="/css/solid.css"/>
               <link rel="stylesheet" href="/css/solid.min.css"/>
+              <link rel="stylesheet" href="/css/brands.min.css"/>
+              <link rel="stylesheet" href="/css/brands.css"/>
               <link rel="stylesheet" href="/css/regular.css"/>
               <link rel="stylesheet" href="/css/regular.min.css"/>
               <link rel="stylesheet" href="/css/fontawesome.min.css"/>
               <link rel="stylesheet" href="/css/fontawesome.css"/>
-              <script src="/js/all.js"/>
-              <script src="/js/all.min.js"/>
-              <script src="/js/solid.js"/>
-              <script src="/js/solid.min.js"/>
-              <script src="/js/regular.js"/>
-              <script src="/js/regular.min.js"/>
-              <script src="/js/fontawesome.min.js"/>
-              <srcipt src="/js/fontawesome.js"/>
+              <Script src="/js/all.js"></Script>
+              <Script src="/js/all.min.js"></Script>
+              <Script src="/js/solid.js"></Script>
+              <Script src="/js/solid.min.js"></Script>
+              <Script src="/js/regular.js"></Script>
+              <Script src="/js/regular.min.js"></Script>
+              <Script src="/js/brands.js"></Script>
+              <Script src="/js/brands.min.js"></Script>
+              <Script src="/js/fontawesome.min.js"></Script>
+              <Script src="/js/fontawesome.js"></Script>
           </Head>
           <Component {...pageProps} />
       </div>)
