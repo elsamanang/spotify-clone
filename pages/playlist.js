@@ -23,39 +23,34 @@ export default function Playlist() {
     }, [])
 
     return(
-        <div className={styles.container}>
-            <Head>
-                <title>Spotify-clone | Recherche</title>
-                <meta name="description" content="My clone of spotify web app" />
-                <link rel="icon" href="/icon-green-64.png" />
-            </Head>
-            <div className='flex w-[100%]'>
-                <div className="w-[22%] h-screen p-0 bg-[#000000] text-[#b3b3b3] font-bold">
-                    <Sidebar />
+    
+        <div className='flex w-[100%]'>
+            <div className="w-[22%] h-screen p-0 bg-[#000000] text-[#b3b3b3] font-bold">
+                <Sidebar />
+            </div>
+            <div className="w-full p-2 bg-[#191919]">
+                <div className="w-[100%] h-[50px]">
+                    <Navbar color={navigColor} />
                 </div>
-                <div className="w-full p-2 bg-[#191919]">
-                    <div className="w-[100%] h-[50px]">
-                        <Navbar color={navigColor} />
-                    </div>
-                    <div className="text-white pt-5 pb-2 px-6">
-                        <div className='grid my-3'>
-                            <div className='mx-2 my-2 flex justify-between'>
-                                <p className='font-bold text-[24px]'>{'Playlists'}</p>
-                            </div>
-                            <div className='grid grid-cols-4 grap-4'>
-                                <LikeCard count='8' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                            </div>
+                <div className="text-white pt-5 pb-2 px-6">
+                    <div className='grid my-3'>
+                        <div className='mx-2 my-2 flex justify-between'>
+                            <p className='font-bold text-[24px]'>{'Playlists'}</p>
+                        </div>
+                        <div className='grid grid-cols-4 grap-4'>
+                            <LikeCard count='8' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                            <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    
     )
 }

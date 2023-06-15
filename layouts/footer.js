@@ -17,6 +17,8 @@ export default function Footer(props) {
     const [isPlayChange, setIsPlayChange] = useState(false);
     const [gradientPlay, setGradientPlay] = useState(0);
     const [colorPlay, setColorPlay] = useState("#ffffff");
+    const [isPlay, setIsPlay] = useState(false);
+    const [audio, setAudio] = useState(new Audio("/musics/sound2.mp3"));
 
     useEffect(() => {
         let volume = document.getElementById('volume');
@@ -75,6 +77,15 @@ export default function Footer(props) {
         setIsPlayChange(value);
     }
     
+    const handleOnPlay = () => {
+        setIsPlay(true);
+        audio.play();
+    }
+    
+    const handleOnPause = () => {
+        setIsPlay(false)
+        audio.pause();
+    }
     return(
         <div className="flex h-[10vh] w-full text-white bg-[#000000]">
             <div className='flex my-1 mx-4 w-[450px]'>
@@ -88,13 +99,15 @@ export default function Footer(props) {
             </div>
             <div className="mx-1 p-1 w-full grid">
                 <div className="flex justify-center">
-                    <Shuffle size={16} className="mx-2 mt-2 text-[#b3b3b3]" />
-                    <Like size={16} className="mx-2 mt-2" />
-                    <span className="text-center mx-4 w-[28px] h-[28px] bg-[#ffffff] rounded-full" style={{paddingTop: '5px'}}>
-                        <Like theme='filled' fill='black' size={16} className="mx-2" />
-                    </span>
-                    <Like size={16} className="mx-2 mt-2" />
-                    <PlayCycle size={16} className="mx-2 mt-2 text-[#b3b3b3]" />
+                    <Shuffle size={16} className="mx-4 mt-2 text-[#b3b3b3]" />
+                    <i className="fa-solid fa-backward-step text-[16px] mt-2"></i>
+                    {!isPlay?
+                        <i onClick={handleOnPlay} className="fa-solid fa-circle-play text-[30px] mx-4 p-1"></i>
+                    :
+                        <i onClick={handleOnPause} className="fa-solid fa-circle-pause text-[30px] mx-4 p-1"></i>
+                    }
+                    <i className="fa-solid fa-forward-step text-[16px] mt-2"></i>
+                    <i className="fa-solid fa-repeat text-[16px] mx-4 mt-2 text-[#b3b3b3]"></i>
                 </div>
                 <div className="flex justify-center" style={{fontSize: '12px', color: "#b3b3b3"}}>
                     <span className='mx-1'>1:05</span>
