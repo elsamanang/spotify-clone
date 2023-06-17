@@ -8,7 +8,8 @@ import {useEffect, useState} from "react";
 
 export default function Footer(props) {
     
-    const [soundX, setSoundX] = useState(0);
+    const [soundLength, setSoundLength] = useState(0);
+    const [playLength, setPlayLength] = useState(0);
     const [volumeX, setVolumeX] = useState(0);
     const [isVolumeChange, setIsVolumeChange] = useState(false);
     const [gradient, setGradient] = useState(0);
@@ -18,15 +19,19 @@ export default function Footer(props) {
     const [gradientPlay, setGradientPlay] = useState(0);
     const [colorPlay, setColorPlay] = useState("#ffffff");
     const [isPlay, setIsPlay] = useState(false);
-    const [audio, setAudio] = useState(new Audio("/musics/sound2.mp3"));
+    const [audio, setAudio] = useState(null);
+    const [playTime, setPlayTime] = useState("-:--");
+    const [durationTime, setDurationTime] = useState("-:--");
 
     useEffect(() => {
         let volume = document.getElementById('volume');
         let play = document.getElementById('play');
-        setSoundX(volume.getBoundingClientRect().left);
+        setPlayLength(parseInt(play.offsetWidth));
+        setSoundLength(parseInt(volume.offsetWidth));
         setPlayX(play.getBoundingClientRect().left);
         let element = document.getElementById('myVolume');
         setVolumeX(element.getBoundingClientRect().left);
+        setAudio(new Audio("/musics/sound2.mp3"));
         //handleTrackStyle(volume.getBoundingClientRect().left-element.getBoundingClientRect().left-6);
     }, [])
     
@@ -50,21 +55,23 @@ export default function Footer(props) {
             let element = document.getElementById('myPlay');
             let e = window.event;
             let diff = parseInt(e.clientX) - parseInt(playX);
-            if (diff > -1 && diff < 318) {
+            if (diff > -1 && diff < playLength) {
                 element.style.position = "relative"
                 element.style.left = diff+"px";
                 handleTrackPlayStyle(diff);
+                audio.currentTime = parseInt((diff/playLength) * audio.duration);
+                setPlayTime(timer(audio.currentTime));
             }
         }
     }
     
     const handleTrackStyle = (button) => {
-        let pourcent = parseInt((button*100)/61);
+        let pourcent = parseInt((button*100)/soundLength);
         setGradient(pourcent);
     }
 
     const handleTrackPlayStyle = (button) => {
-        let pourcent = parseInt((button*100)/318);
+        let pourcent = parseInt((button*100)/playLength);
         setGradientPlay(pourcent);
     }
     
@@ -78,14 +85,33 @@ export default function Footer(props) {
     }
     
     const handleOnPlay = () => {
+        setDurationTime(timer(audio.duration))
         setIsPlay(true);
         audio.play();
+        audio.addEventListener('timeupdate', handleProgress);
     }
-    
     const handleOnPause = () => {
         setIsPlay(false)
         audio.pause();
     }
+    
+    const handleProgress = () => {
+        let currentDuration = parseInt((audio.currentTime/audio.duration) *100);
+        let currentPosition = (currentDuration/100) * playLength;
+        setGradientPlay(currentDuration);
+        setPlayTime(timer(audio.currentTime));
+        let element = document.getElementById('myPlay');
+        element.style.position = "relative"
+        element.style.left = currentPosition+"px";
+    }
+    
+    const timer = (duration) => {
+        let minute = ~~(duration/60);
+        let seconde = parseInt(duration % 60);
+        let response = seconde > 10 ?`${minute}:${seconde}`: `${minute}:0${seconde}`;
+        return(response);
+    }
+    
     return(
         <div className="flex h-[10vh] w-full text-white bg-[#000000]">
             <div className='flex my-1 mx-4 w-[450px]'>
@@ -110,13 +136,13 @@ export default function Footer(props) {
                     <i className="fa-solid fa-repeat text-[16px] mx-4 mt-2 text-[#b3b3b3]"></i>
                 </div>
                 <div className="flex justify-center" style={{fontSize: '12px', color: "#b3b3b3"}}>
-                    <span className='mx-1'>1:05</span>
+                    <span className='mx-1'>{playTime}</span>
                     <div id="play" 
                          onMouseDown={() => handlePlayUp(true)} onMouseMove={handlePlayMove} onMouseLeave={() =>setColorPlay("#ffffff")} onMouseUp={() => handlePlayUp(false)}
                          className="m-2 group bg-[#252525] rounded-full" style={{height: '4px', width: '58%', backgroundImage: 'linear-gradient(to right, '+ colorPlay +' '+ gradientPlay + '%, #252525 '+ gradientPlay + '%)'}}>
                         <div id='myPlay' className="p-1 invisible group-hover:visible bg-[#ffffff] rounded-full" style={{marginTop: "-1%", height: '12px', width: '12px'}}></div>
                     </div>
-                    <span className='mx-1'>3:05</span>
+                    <span className='mx-1'>{durationTime}</span>
                 </div>
             </div>
             <div className="flex mx-2 w-[480px] text-[#b3b3b3]">
