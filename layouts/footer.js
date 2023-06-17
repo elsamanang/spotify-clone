@@ -8,7 +8,8 @@ import {useEffect, useState} from "react";
 
 export default function Footer(props) {
     
-    const [soundX, setSoundX] = useState(0);
+    const [soundLength, setSoundLength] = useState(0);
+    const [playLength, setPlayLength] = useState(0);
     const [volumeX, setVolumeX] = useState(0);
     const [isVolumeChange, setIsVolumeChange] = useState(false);
     const [gradient, setGradient] = useState(0);
@@ -18,15 +19,17 @@ export default function Footer(props) {
     const [gradientPlay, setGradientPlay] = useState(0);
     const [colorPlay, setColorPlay] = useState("#ffffff");
     const [isPlay, setIsPlay] = useState(false);
-    const [audio, setAudio] = useState(new Audio("/musics/sound2.mp3"));
+    const [audio, setAudio] = useState(null);
 
     useEffect(() => {
         let volume = document.getElementById('volume');
         let play = document.getElementById('play');
-        setSoundX(volume.getBoundingClientRect().left);
+        setPlayLength(parseInt(play.offsetWidth));
+        setSoundLength(parseInt(volume.offsetWidth));
         setPlayX(play.getBoundingClientRect().left);
         let element = document.getElementById('myVolume');
         setVolumeX(element.getBoundingClientRect().left);
+        setAudio(new Audio("/musics/sound2.mp3"))
         //handleTrackStyle(volume.getBoundingClientRect().left-element.getBoundingClientRect().left-6);
     }, [])
     
@@ -59,12 +62,12 @@ export default function Footer(props) {
     }
     
     const handleTrackStyle = (button) => {
-        let pourcent = parseInt((button*100)/61);
+        let pourcent = parseInt((button*100)/soundLength);
         setGradient(pourcent);
     }
 
     const handleTrackPlayStyle = (button) => {
-        let pourcent = parseInt((button*100)/318);
+        let pourcent = parseInt((button*100)/playLength);
         setGradientPlay(pourcent);
     }
     
@@ -80,12 +83,17 @@ export default function Footer(props) {
     const handleOnPlay = () => {
         setIsPlay(true);
         audio.play();
+        console.log(audio.currentTime);
+        /*while (isPlay) {
+            console.log(parseInt((audio.currentTime/audio.duration) * 100)); 
+        }*/
     }
     
     const handleOnPause = () => {
         setIsPlay(false)
         audio.pause();
     }
+    
     return(
         <div className="flex h-[10vh] w-full text-white bg-[#000000]">
             <div className='flex my-1 mx-4 w-[450px]'>
