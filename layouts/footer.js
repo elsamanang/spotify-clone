@@ -32,7 +32,7 @@ export default function Footer(props) {
         let element = document.getElementById('myVolume');
         setVolumeX(element.getBoundingClientRect().left);
         setAudio(new Audio("/musics/sound2.mp3"));
-        //handleTrackStyle(volume.getBoundingClientRect().left-element.getBoundingClientRect().left-6);
+        
     }, [])
     
     const handleVolumeMove = () => {
@@ -41,7 +41,7 @@ export default function Footer(props) {
             let element = document.getElementById('myVolume');
             let e = window.event;
             let diff = parseInt(e.clientX) - parseInt(volumeX);
-            if (diff > -1 && diff < 62) {
+            if (diff > -1 && diff < soundLength) {
                 element.style.position = "relative"
                 element.style.left = diff+"px";
                 handleTrackStyle(diff);
@@ -68,6 +68,7 @@ export default function Footer(props) {
     const handleTrackStyle = (button) => {
         let pourcent = parseInt((button*100)/soundLength);
         setGradient(pourcent);
+        audio.volume = pourcent/100;
     }
 
     const handleTrackPlayStyle = (button) => {
@@ -77,7 +78,6 @@ export default function Footer(props) {
     
     const handleVolumeUp = (value) => {
         setIsVolumeChange(value);
-        //console.log(value)
     }
 
     const handlePlayUp = (value) => {
@@ -88,6 +88,8 @@ export default function Footer(props) {
         setDurationTime(timer(audio.duration))
         setIsPlay(true);
         audio.play();
+        audio.volume = 0.5;
+        handleVolumeProgress(50);
         audio.addEventListener('timeupdate', handleProgress);
     }
     const handleOnPause = () => {
@@ -103,6 +105,14 @@ export default function Footer(props) {
         let element = document.getElementById('myPlay');
         element.style.position = "relative"
         element.style.left = currentPosition+"px";
+    }
+    
+    const handleVolumeProgress = (vol) => {
+        let element = document.getElementById('myVolume');
+        let diff = parseInt((soundLength*vol)/100);
+        element.style.position = "relative"
+        element.style.left = diff+"px";
+        setGradient(vol);
     }
     
     const timer = (duration) => {
