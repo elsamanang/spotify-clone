@@ -9,11 +9,18 @@ import RadioCard from '../components/radioCard'
 import GreetCard from '../components/greetCard'
 import {Foot} from "@icon-park/react";
 import Footer from "../layouts/footer";
-
+import {artists, musics, playlist, preferlist, dailylist} from "../data/music";
 
 export default function Home() {
 
-    const [navigColor, setNavigColor] = useState("")
+    const [navigColor, setNavigColor] = useState("");
+    const [sounds, setSounds] = useState(musics);
+    const [singer, setSinger] = useState(artists);
+    const [greatPlay, setGreatPlay] = useState([
+        playlist[0], preferlist[1], dailylist[2], sounds[3]
+    ])
+    const [currentPlayList, setCurrentPlayList] = useState(null);
+    const [currentMusic, setCurrentMusic] = useState(null);
 
     useEffect(() => {
         document.getElementById("scrolling").addEventListener("scroll", event => {
@@ -24,7 +31,20 @@ export default function Home() {
                 setNavigColor("");
             }
         });
-    }, [])
+    }, []);
+    
+    const handleFindPlayListCover = (id) => {
+        let item = sounds.find(elm => elm.id === id);
+        return item.cover;
+    }
+    
+    const handleCurrentPlayList = (item) => {
+        if (item.musics) {
+            setCurrentPlayList(item);
+            let music = sounds.find(elm => elm.id === item.musics[0]);
+            setCurrentMusic(music);
+        }
+    }
 
     return(
         
@@ -45,73 +65,31 @@ export default function Home() {
                         <div className="text-white pt-2 pb-2 px-6 h-full">
                             <div className='grid my-5 mb-8'>
                                 <h3 className='font-bold mx-2 my-2 text-[28px]'>{'Bonjour'}</h3>
-                                <div className='flex'>
-                                    <GreetCard img='/artiste/a1.jpg' titre='Maluma' />
-                                    <GreetCard img='/artiste/a2.jpg' titre='Sia'/>
+                                <div className='grid grid-cols-3'>
+                                    {greatPlay.map(item =>
+                                        <GreetCard img={item.musics? handleFindPlayListCover(item.musics[0]): item.cover} 
+                                                   titre={item.title} activePlay={handleCurrentPlayList} list={item}
+                                        />
+                                    )}
                                 </div>
                             </div>
                             <div className='grid my-3'>
                                 <h3 className='font-bold mx-2 my-2 text-[24px]'>{'Conçu pour elsa manang'}</h3>
-                                <div className='flex'>
-                                    <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Daily Mix' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <div className='grid grid-cols-4'>
+                                    {dailylist.slice(0,4).map( item =>
+                                        <PlayCard key={item.id} img={handleFindPlayListCover(item.musics[0])} titre={item.title} detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                    )}
                                 </div>
                             </div>
                             <div className='grid my-3'>
                                 <div className='mx-2 my-2 flex justify-between'>
-                                    <p className='font-bold text-[24px]'>{'Les meilleurs auto-compositeurs'}</p>
+                                    <p className='font-bold text-[24px]'>{'Vos Mix Préférés'}</p>
                                     <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
                                 </div>
-                                <div className='flex'>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                </div>
-                            </div>
-                            <div className='grid my-3'>
-                                <div className='mx-2 my-2 flex justify-between'>
-                                    <p className='font-bold text-[24px]'>{'Écoutés récemment'}</p>
-                                </div>
-                                <div className='flex'>
-                                    <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Mixe Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
-                                </div>
-                            </div>
-                            <div className='grid my-3'>
-                                <div className='mx-2 my-2 flex justify-between'>
-                                    <p className='font-bold text-[24px]'>{'Les classiques'}</p>
-                                    <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
-                                </div>
-                                <div className='flex'>
-                                    <PlayCard img='/covers/c1.jpg' titre='All Out 80s' detail='The bigest song of 80s'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='All Out 90s' detail='The bigest song of 90s'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='All Out 70s' detail='The bigest song of 70s'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='All Out 2000s' detail='The bigest song of 2000s'/>
-                                </div>
-                            </div>
-                            <div className='grid my-3'>
-                                <div className='mx-2 my-2 flex justify-between'>
-                                    <p className='font-bold text-[24px]'>{'Radios populaires'}</p>
-                                    <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
-                                </div>
-                                <div className='flex'>
-                                    <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
-                                    <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
-                                    <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
-                                    <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
-                                </div>
-                            </div>
-                            <div className='grid my-3'>
-                                <div className='mx-2 my-2 flex justify-between'>
-                                    <p className='font-bold text-[24px]'>{'Radios recommandées'}</p>
-                                </div>
-                                <div className='flex'>
-                                    <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
-                                    <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
-                                    <RadioCard img='/covers/c3.jpg' titre='Maluma' detail='Par Spotify' />
+                                <div className='grid grid-cols-4'>
+                                    {preferlist.slice(0,4).map( item =>
+                                        <PlayCard key={item.id} img={handleFindPlayListCover(item.musics[0])} titre={item.title} detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                    )}
                                 </div>
                             </div>
                             <div className='grid my-3'>
@@ -119,20 +97,20 @@ export default function Home() {
                                     <p className='font-bold text-[24px]'>{'Spotify playlists'}</p>
                                     <p className='font-bold text-[12px] text-[#b3b3b3] mt-[12px]'>{'TOUT AFFICHER'}</p>
                                 </div>
-                                <div className='flex'>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
-                                    <PlayCard img='/covers/c1.jpg' titre='Writing by Maluma' detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                <div className='grid grid-cols-4'>
+                                    {playlist.slice(0,4).map( item =>
+                                        <PlayCard key={item.id} img={handleFindPlayListCover(item.musics[0])} titre={item.title} detail='Maluma, Sia, Dua lipa, Osuna, plus'/>
+                                    )}
                                 </div>
                             </div>
                             <div className='grid my-3'>
                                 <div className='mx-2 my-2 flex justify-between'>
                                     <p className='font-bold text-[24px]'>{'Vos artistes préferés'}</p>
                                 </div>
-                                <div className='flex'>
-                                    <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
-                                    <ArtitsteCard img='/covers/c2.jpg' titre='Sia' detail='Artiste'/>
+                                <div className='grid grid-cols-4'>
+                                    {singer.slice(0,4).map(item => 
+                                        <ArtitsteCard key={item.id} img={item.img} titre={item.name} detail='Artiste'/>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -140,7 +118,11 @@ export default function Home() {
                 </div>
             </div>
             <div className='bg-white h-[10vh]'>
-                <Footer img='/artiste/a1.jpg' titre='Sweet but psycho' artist='Ava Max' />
+                {currentMusic != null?
+                    <Footer img={currentMusic.cover} audio={currentMusic.src} titre='Sweet but psycho' artist='Ava Max' />
+                :
+                    <Footer img="" titre='-----:-----' audio={null} artist='---:---' />
+                }
             </div>
         </div>
     )
