@@ -31,7 +31,7 @@ export default function Footer(props) {
         setPlayX(play.getBoundingClientRect().left);
         let element = document.getElementById('myVolume');
         setVolumeX(element.getBoundingClientRect().left);
-        setAudio(new Audio("/musics/sound2.mp3"));
+        setAudio(new Audio(props.audio));
         
     }, [])
     
@@ -85,7 +85,8 @@ export default function Footer(props) {
     }
     
     const handleOnPlay = () => {
-        setDurationTime(timer(audio.duration))
+        console.log(props.audio)
+        setDurationTime(timer(parseInt(audio.duration)))
         setIsPlay(true);
         audio.play();
         audio.volume = 0.5;
@@ -125,7 +126,11 @@ export default function Footer(props) {
     return(
         <div className="flex h-[10vh] w-full text-white bg-[#000000]">
             <div className='flex my-1 mx-4 w-[450px]'>
-                <Image className='w-[50px] h-[50px] rounded' src={props.img} alt="" height={50} width={50} />
+                {props.img === ""? 
+                    <span className='w-[50px] h-[50px] bg-[#b3b3b3]/50 rounded'></span>
+                :
+                    <Image className='w-[50px] h-[50px] rounded' src={props.img} alt="" height={50} width={50} />
+                }
                 <div className='mx-4'>
                     <p className='text-[14px] font-semibold'>{props.titre}</p>
                     <span style={{fontSize: '12px', color: "#b3b3b3"}}>{props.artist}</span>
