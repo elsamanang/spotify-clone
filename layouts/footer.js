@@ -31,8 +31,8 @@ export default function Footer(props) {
         setPlayX(play.getBoundingClientRect().left);
         let element = document.getElementById('myVolume');
         setVolumeX(element.getBoundingClientRect().left);
-        setAudio(new Audio("/musics/sound2.mp3"));
-        //handleTrackStyle(volume.getBoundingClientRect().left-element.getBoundingClientRect().left-6);
+        setAudio(new Audio(props.audio));
+        
     }, [])
     
     const handleVolumeMove = () => {
@@ -41,7 +41,7 @@ export default function Footer(props) {
             let element = document.getElementById('myVolume');
             let e = window.event;
             let diff = parseInt(e.clientX) - parseInt(volumeX);
-            if (diff > -1 && diff < 62) {
+            if (diff > -1 && diff < soundLength) {
                 element.style.position = "relative"
                 element.style.left = diff+"px";
                 handleTrackStyle(diff);
@@ -68,6 +68,7 @@ export default function Footer(props) {
     const handleTrackStyle = (button) => {
         let pourcent = parseInt((button*100)/soundLength);
         setGradient(pourcent);
+        audio.volume = pourcent/100;
     }
 
     const handleTrackPlayStyle = (button) => {
@@ -77,7 +78,6 @@ export default function Footer(props) {
     
     const handleVolumeUp = (value) => {
         setIsVolumeChange(value);
-        //console.log(value)
     }
 
     const handlePlayUp = (value) => {
@@ -85,9 +85,12 @@ export default function Footer(props) {
     }
     
     const handleOnPlay = () => {
-        setDurationTime(timer(audio.duration))
+        console.log(props.audio)
+        setDurationTime(timer(parseInt(audio.duration)))
         setIsPlay(true);
         audio.play();
+        audio.volume = 0.5;
+        handleVolumeProgress(50);
         audio.addEventListener('timeupdate', handleProgress);
     }
     const handleOnPause = () => {
@@ -105,6 +108,14 @@ export default function Footer(props) {
         element.style.left = currentPosition+"px";
     }
     
+    const handleVolumeProgress = (vol) => {
+        let element = document.getElementById('myVolume');
+        let diff = parseInt((soundLength*vol)/100);
+        element.style.position = "relative"
+        element.style.left = diff+"px";
+        setGradient(vol);
+    }
+    
     const timer = (duration) => {
         let minute = ~~(duration/60);
         let seconde = parseInt(duration % 60);
@@ -115,7 +126,11 @@ export default function Footer(props) {
     return(
         <div className="flex h-[10vh] w-full text-white bg-[#000000]">
             <div className='flex my-1 mx-4 w-[450px]'>
-                <Image className='w-[50px] h-[50px] rounded' src={props.img} alt="" height={50} width={50} />
+                {props.img === ""? 
+                    <span className='w-[50px] h-[50px] bg-[#b3b3b3]/50 rounded'></span>
+                :
+                    <Image className='w-[50px] h-[50px] rounded' src={props.img} alt="" height={50} width={50} />
+                }
                 <div className='mx-4'>
                     <p className='text-[14px] font-semibold'>{props.titre}</p>
                     <span style={{fontSize: '12px', color: "#b3b3b3"}}>{props.artist}</span>
