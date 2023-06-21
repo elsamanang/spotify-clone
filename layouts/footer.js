@@ -6,23 +6,12 @@ import {
 } from "@icon-park/react";
 import {useEffect, useState} from "react";
 
-export default function Footer(props) {
+export default function Footer({img, titre, artist, isPlay, handleOnPlay, handleOnPause, playTime, 
+                                   handlePlayUp, colorPlay, handlePlayMove, setColorPlay,durationTime,
+                                   gradientPlay, handleVolumeUp, handleVolumeMove, gradient, setColor, color,
+                                   setPlayLength, setSoundLength, setPlayX, setVolumeX, audio
+}) {
     
-    const [soundLength, setSoundLength] = useState(0);
-    const [playLength, setPlayLength] = useState(0);
-    const [volumeX, setVolumeX] = useState(0);
-    const [isVolumeChange, setIsVolumeChange] = useState(false);
-    const [gradient, setGradient] = useState(0);
-    const [color, setColor] = useState("#ffffff");
-    const [playX, setPlayX] = useState(0);
-    const [isPlayChange, setIsPlayChange] = useState(false);
-    const [gradientPlay, setGradientPlay] = useState(0);
-    const [colorPlay, setColorPlay] = useState("#ffffff");
-    const [isPlay, setIsPlay] = useState(false);
-    const [audio, setAudio] = useState(null);
-    const [playTime, setPlayTime] = useState("-:--");
-    const [durationTime, setDurationTime] = useState("-:--");
-
     useEffect(() => {
         let volume = document.getElementById('volume');
         let play = document.getElementById('play');
@@ -30,110 +19,22 @@ export default function Footer(props) {
         setSoundLength(parseInt(volume.offsetWidth));
         setPlayX(play.getBoundingClientRect().left);
         let element = document.getElementById('myVolume');
-        setVolumeX(element.getBoundingClientRect().left);
-        setAudio(new Audio(props.audio));
-        
-    }, [])
-    
-    const handleVolumeMove = () => {
-        setColor("#1ed760");
-        if(isVolumeChange) {
-            let element = document.getElementById('myVolume');
-            let e = window.event;
-            let diff = parseInt(e.clientX) - parseInt(volumeX);
-            if (diff > -1 && diff < soundLength) {
-                element.style.position = "relative"
-                element.style.left = diff+"px";
-                handleTrackStyle(diff);
-            }
+        setVolumeX(element.getBoundingClientRect().left);   
+            
         }
-    }
-
-    const handlePlayMove = () => {
-        setColorPlay("#1ed760");
-        if(isPlayChange) {
-            let element = document.getElementById('myPlay');
-            let e = window.event;
-            let diff = parseInt(e.clientX) - parseInt(playX);
-            if (diff > -1 && diff < playLength) {
-                element.style.position = "relative"
-                element.style.left = diff+"px";
-                handleTrackPlayStyle(diff);
-                audio.currentTime = parseInt((diff/playLength) * audio.duration);
-                setPlayTime(timer(audio.currentTime));
-            }
-        }
-    }
-    
-    const handleTrackStyle = (button) => {
-        let pourcent = parseInt((button*100)/soundLength);
-        setGradient(pourcent);
-        audio.volume = pourcent/100;
-    }
-
-    const handleTrackPlayStyle = (button) => {
-        let pourcent = parseInt((button*100)/playLength);
-        setGradientPlay(pourcent);
-    }
-    
-    const handleVolumeUp = (value) => {
-        setIsVolumeChange(value);
-    }
-
-    const handlePlayUp = (value) => {
-        setIsPlayChange(value);
-    }
-    
-    const handleOnPlay = () => {
-        console.log(props.audio)
-        setDurationTime(timer(parseInt(audio.duration)))
-        setIsPlay(true);
-        audio.play();
-        audio.volume = 0.5;
-        handleVolumeProgress(50);
-        audio.addEventListener('timeupdate', handleProgress);
-    }
-    const handleOnPause = () => {
-        setIsPlay(false)
-        audio.pause();
-    }
-    
-    const handleProgress = () => {
-        let currentDuration = parseInt((audio.currentTime/audio.duration) *100);
-        let currentPosition = (currentDuration/100) * playLength;
-        setGradientPlay(currentDuration);
-        setPlayTime(timer(audio.currentTime));
-        let element = document.getElementById('myPlay');
-        element.style.position = "relative"
-        element.style.left = currentPosition+"px";
-    }
-    
-    const handleVolumeProgress = (vol) => {
-        let element = document.getElementById('myVolume');
-        let diff = parseInt((soundLength*vol)/100);
-        element.style.position = "relative"
-        element.style.left = diff+"px";
-        setGradient(vol);
-    }
-    
-    const timer = (duration) => {
-        let minute = ~~(duration/60);
-        let seconde = parseInt(duration % 60);
-        let response = seconde > 10 ?`${minute}:${seconde}`: `${minute}:0${seconde}`;
-        return(response);
-    }
+        , [])
     
     return(
         <div className="flex h-[10vh] w-full text-white bg-[#000000]">
             <div className='flex my-1 mx-4 w-[450px]'>
-                {props.img === ""? 
+                {img === ""? 
                     <span className='w-[50px] h-[50px] bg-[#b3b3b3]/50 rounded'></span>
                 :
-                    <Image className='w-[50px] h-[50px] rounded' src={props.img} alt="" height={50} width={50} />
+                    <Image className='w-[50px] h-[50px] rounded' src={img} alt="" height={50} width={50} />
                 }
                 <div className='mx-4'>
-                    <p className='text-[14px] font-semibold'>{props.titre}</p>
-                    <span style={{fontSize: '12px', color: "#b3b3b3"}}>{props.artist}</span>
+                    <p className='text-[14px] font-semibold'>{titre}</p>
+                    <span style={{fontSize: '12px', color: "#b3b3b3"}}>{artist}</span>
                 </div>
                 <Like size={16} className="mx-2" style={{marginTop: '6%', color: "#b3b3b3"}} />
                 <DataServer size={16} className="mx-2 mt-8" style={{marginTop: '6%', color: "#b3b3b3"}} />
@@ -143,7 +44,7 @@ export default function Footer(props) {
                     <Shuffle size={16} className="mx-4 mt-2 text-[#b3b3b3]" />
                     <i className="fa-solid fa-backward-step text-[16px] mt-2"></i>
                     {!isPlay?
-                        <i onClick={handleOnPlay} className="fa-solid fa-circle-play text-[30px] mx-4 p-1"></i>
+                        <i id={'playButton'} onClick={() => handleOnPlay(audio)} className="fa-solid fa-circle-play text-[30px] mx-4 p-1"></i>
                     :
                         <i onClick={handleOnPause} className="fa-solid fa-circle-pause text-[30px] mx-4 p-1"></i>
                     }
@@ -168,8 +69,8 @@ export default function Footer(props) {
                     <VolumeNotice size={16} />
                     <div id="volume" 
                          onMouseDown={() => handleVolumeUp(true)} onMouseMove={handleVolumeMove} onMouseLeave={() =>setColor("#ffffff")} onMouseUp={() => handleVolumeUp(false)}
-                         className="group p-0 mx-2 rounded-full" style={{height: '4px', width: '150px', marginTop: '5%', backgroundImage: 'linear-gradient(to right, '+ color +' '+ gradient + '%, #252525 '+ gradient + '%)'}}>
-                        <div id='myVolume' className="p-1 invisible group-hover:visible bg-[#ffffff] rounded-full" style={{marginTop: "-5%", height: '12px', width: '12px'}}></div>
+                         className="group p-0 mx-2 rounded-full self-start" style={{height: '4px', width: '150px', marginTop: '3%', backgroundImage: 'linear-gradient(to right, '+ color +' '+ gradient + '%, #252525 '+ gradient + '%)'}}>
+                        <div id='myVolume' className="p-1 invisible group-hover:visible bg-[#ffffff] rounded-full" style={{marginTop: "-3%", height: '12px', width: '12px'}}></div>
                     </div>
                 </div>
                 <ClickToFold size={16} className="mx-2" style={{marginTop: '6%'}} />
