@@ -21,6 +21,20 @@ export default function Home() {
     ])
     const [currentPlayList, setCurrentPlayList] = useState(null);
     const [currentMusic, setCurrentMusic] = useState(null);
+    const [audio, setAudio] = useState(null);
+    const [soundLength, setSoundLength] = useState(0);
+    const [playLength, setPlayLength] = useState(0);
+    const [volumeX, setVolumeX] = useState(0);
+    const [isVolumeChange, setIsVolumeChange] = useState(false);
+    const [gradient, setGradient] = useState(0);
+    const [color, setColor] = useState("#ffffff");
+    const [playX, setPlayX] = useState(0);
+    const [isPlayChange, setIsPlayChange] = useState(false);
+    const [gradientPlay, setGradientPlay] = useState(0);
+    const [colorPlay, setColorPlay] = useState("#ffffff");
+    const [isPlay, setIsPlay] = useState(false);
+    const [playTime, setPlayTime] = useState("-:--");
+    const [durationTime, setDurationTime] = useState("-:--");
 
     useEffect(() => {
         document.getElementById("scrolling").addEventListener("scroll", event => {
@@ -43,7 +57,115 @@ export default function Home() {
             setCurrentPlayList(item);
             let music = sounds.find(elm => elm.id === item.musics[0]);
             setCurrentMusic(music);
+            if(audio == null) {
+                setAudio(new Audio(music.src));
+            }
+            else {
+                audio.src = music.src;
+            }
+            handleOnPlay(audio);
         }
+    }
+
+    const handleOnPlay = (music) => {
+        if(music == null) {
+            setIsPlay(false);
+            return
+        }
+        
+        setIsPlay(true);
+        music.play();
+        music.volume = 0.5;
+        handleVolumeProgress(50);
+        music.addEventListener('timeupdate', handleProgress);
+    }
+    const handleOnPause = () => {
+        setIsPlay(false)
+        audio.pause();
+    }
+
+    const handleVolumeMove = () => {
+        setColor("#1ed760");
+        if(audio == null) {
+            setIsVolumeChange(false);
+            return
+        }
+        if(isVolumeChange) {
+            let element = document.getElementById('myVolume');
+            let e = window.event;
+            let diff = parseInt(e.clientX) - parseInt(volumeX);
+            if (diff > -1 && diff < soundLength) {
+                element.style.position = "relative"
+                element.style.left = diff+"px";
+                handleTrackStyle(diff);
+            }
+        }
+    }
+
+    const handlePlayMove = () => {
+        setColorPlay("#1ed760");
+        if(audio == null) {
+            setIsPlay(false);
+            setIsPlayChange(false)
+            return
+        }
+        if(isPlayChange) {
+            let element = document.getElementById('myPlay');
+            let e = window.event;
+            let diff = parseInt(e.clientX) - parseInt(playX);
+            if (diff > -1 && diff < playLength) {
+                element.style.position = "relative"
+                element.style.left = diff+"px";
+                handleTrackPlayStyle(diff);
+                audio.currentTime = parseInt((diff/playLength) * audio.duration);
+                setPlayTime(timer(audio.currentTime));
+            }
+        }
+    }
+
+    const handleTrackStyle = (button) => {
+        let pourcent = parseInt((button*100)/soundLength);
+        setGradient(pourcent);
+        audio.volume = pourcent/100;
+    }
+
+    const handleTrackPlayStyle = (button) => {
+        let pourcent = parseInt((button*100)/playLength);
+        setGradientPlay(pourcent);
+    }
+
+    const handleVolumeUp = (value) => {
+        setIsVolumeChange(value);
+    }
+
+    const handlePlayUp = (value) => {
+        setIsPlayChange(value);
+    }
+
+    const handleProgress = () => {
+        setDurationTime(timer(parseInt(audio.duration)))
+        let currentDuration = parseInt((audio.currentTime/audio.duration) *100);
+        let currentPosition = (currentDuration/100) * playLength;
+        setGradientPlay(currentDuration);
+        setPlayTime(timer(audio.currentTime));
+        let element = document.getElementById('myPlay');
+        element.style.position = "relative"
+        element.style.left = currentPosition+"px";
+    }
+
+    const handleVolumeProgress = (vol) => {
+        let element = document.getElementById('myVolume');
+        let diff = parseInt((soundLength*vol)/100);
+        element.style.position = "relative"
+        element.style.left = diff+"px";
+        setGradient(vol);
+    }
+
+    const timer = (duration) => {
+        let minute = ~~(duration/60);
+        let seconde = parseInt(duration % 60);
+        let response = seconde > 10 ?`${minute}:${seconde}`: `${minute}:0${seconde}`;
+        return(response);
     }
 
     return(
@@ -67,7 +189,7 @@ export default function Home() {
                                 <h3 className='font-bold mx-2 my-2 text-[28px]'>{'Bonjour'}</h3>
                                 <div className='grid grid-cols-3'>
                                     {greatPlay.map(item =>
-                                        <GreetCard img={item.musics? handleFindPlayListCover(item.musics[0]): item.cover} 
+                                        <GreetCard key={item.id} img={item.musics? handleFindPlayListCover(item.musics[0]): item.cover} 
                                                    titre={item.title} activePlay={handleCurrentPlayList} list={item}
                                         />
                                     )}
@@ -119,9 +241,20 @@ export default function Home() {
             </div>
             <div className='bg-white h-[10vh]'>
                 {currentMusic != null?
-                    <Footer img={currentMusic.cover} audio={currentMusic.src} titre='Sweet but psycho' artist='Ava Max' />
+                    <Footer img={currentMusic.cover} handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} 
+                            audio={audio} titre={currentMusic.title} artist={currentMusic.artist} playTime={playTime}
+                            handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay}
+                            gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
+                            handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
+                            setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
+                    />
                 :
-                    <Footer img="" titre='-----:-----' audio={null} artist='---:---' />
+                    <Footer img="" handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} titre='-----:-----' audio={null}
+                            handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay}
+                            gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
+                            handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
+                            artist='---:---' setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
+                    />
                 }
             </div>
         </div>
