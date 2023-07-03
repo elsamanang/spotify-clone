@@ -66,6 +66,38 @@ export default function Home() {
             handleOnPlay(audio);
         }
     }
+    
+    const handleNextPlay = () => {
+        if (audio) {
+            let position = currentPlayList.musics.indexOf(currentMusic.id);
+
+            if ((currentPlayList.musics.length - 1) > position) {
+                let music = sounds.find(elm => elm.id === currentPlayList.musics[position+1]);
+                setCurrentMusic(music);
+                audio.src = music.src;
+                handleOnPlay(audio);
+            }
+        }
+    }
+
+    const handlePreviewPlay = () => {
+        if (audio) {
+            let position = currentPlayList.musics.indexOf(currentMusic.id);
+            let pourcent = parseInt((audio.currentTime * 100) / audio.duration);
+            if (pourcent > 5) {
+                if (position > 0) {
+                    let music = sounds.find(elm => elm.id === currentPlayList.musics[position-1]);
+                    setCurrentMusic(music);
+                    audio.src = music.src;
+                    handleOnPlay(audio);
+                }
+            }
+            else {
+                audio.src = currentMusic.src;
+                handleOnPlay(audio);
+            }
+        }
+    }
 
     const handleOnPlay = (music) => {
         if(music == null) {
@@ -247,6 +279,7 @@ export default function Home() {
                             gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
                             handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
                             setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
+                            handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay}
                     />
                 :
                     <Footer img="" handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} titre='-----:-----' audio={null}
@@ -254,6 +287,7 @@ export default function Home() {
                             gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
                             handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
                             artist='---:---' setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
+                            handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay}
                     />
                 }
             </div>
