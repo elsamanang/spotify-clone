@@ -35,6 +35,8 @@ export default function Home() {
     const [isPlay, setIsPlay] = useState(false);
     const [playTime, setPlayTime] = useState("-:--");
     const [durationTime, setDurationTime] = useState("-:--");
+    const [isRepeat, setIsRepeat] = useState(false);
+    const [isAleatoire, setIsAleatoire] = useState(false);
 
     useEffect(() => {
         document.getElementById("scrolling").addEventListener("scroll", event => {
@@ -69,6 +71,11 @@ export default function Home() {
     
     const handleNextPlay = () => {
         if (audio) {
+            if(isRepeat) {
+                handleOnPlay(audio);
+                return
+            }
+            
             let position = currentPlayList.musics.indexOf(currentMusic.id);
 
             if ((currentPlayList.musics.length - 1) > position) {
@@ -110,6 +117,15 @@ export default function Home() {
         music.volume = 0.5;
         handleVolumeProgress(50);
         music.addEventListener('timeupdate', handleProgress);
+        music.addEventListener('ended', handleEnd);
+    }
+
+    const handleRepeat = () => {
+        setIsRepeat(!isRepeat);
+    }
+    
+    const handleEnd = () => {
+        handleNextPlay();
     }
     const handleOnPause = () => {
         setIsPlay(false)
@@ -273,21 +289,21 @@ export default function Home() {
             </div>
             <div className='bg-white h-[10vh]'>
                 {currentMusic != null?
-                    <Footer img={currentMusic.cover} handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} 
+                    <Footer img={currentMusic.cover} handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} isRepeat={isRepeat}
                             audio={audio} titre={currentMusic.title} artist={currentMusic.artist} playTime={playTime}
                             handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay}
                             gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
                             handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
                             setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
-                            handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay}
+                            handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay} handleRepeat={handleRepeat}
                     />
                 :
                     <Footer img="" handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} titre='-----:-----' audio={null}
-                            handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay}
+                            handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay} isRepeat={isRepeat}
                             gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
                             handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
                             artist='---:---' setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
-                            handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay}
+                            handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay} handleRepeat={handleRepeat}
                     />
                 }
             </div>
