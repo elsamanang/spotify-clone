@@ -4,6 +4,9 @@ import Head from "next/head";
 import Script from "next/script";
 import {useEffect, useState} from "react";
 import {artists, dailylist, musics, playlist, preferlist} from "../data/music";
+import Sidebar from "../layouts/sidebar";
+import Navbar from "../layouts/navbar";
+import Footer from "../layouts/footer";
 
 function MyApp({ Component, pageProps }) {
 
@@ -196,17 +199,6 @@ function MyApp({ Component, pageProps }) {
             handleOnPlay(audio);
         }
     }
-
-    useEffect(() => {
-        document.getElementById("scrolling").addEventListener("scroll", event => {
-            if(document.getElementById("scrolling").scrollTop >3 ) {
-                setNavigColor("bg-[#191919]");
-            }
-            else {
-                setNavigColor("");
-            }
-        });
-    }, []);
     
     return (
       <div className="contents">
@@ -235,17 +227,50 @@ function MyApp({ Component, pageProps }) {
               <Script src="/js/fontawesome.min.js"></Script>
               <Script src="/js/fontawesome.js"></Script>
           </Head>
-          <Component {...pageProps}
-                     handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} audio={null} setAudio={setAudio} sounds={sounds}
-                     handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay} isRepeat={isRepeat}
-                     gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
-                     handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
-                     setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
-                     handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay} handleRepeat={handleRepeat} singer={singer}
-                     currentMusic={currentMusic} currentPlayList={currentPlayList} navigColor={navigColor} greatPlay={greatPlay}
-                     handleCurrentPlayList={handleCurrentPlayList} handleFindPlayListCover={handleFindPlayListCover}
-          />
-      </div>)
+          <div className='grid w-[100%] bg-[#000000] h-[100vh]'>
+              <div className='flex w-[100%] h-[90vh]'>
+                  <div className="w-[26%] h-screen p-0">
+                      <Sidebar />
+                  </div>
+                  <div className="w-[74%] h-[90vh] p-1">
+                      <div id='scrolling' className='grid mt-1 p-2 max-h-[88vh] bg-[#191919] rounded-md overflow-y-scroll'>
+                          <div className="w-[72%] h-[50px] my-[-8px] fixed">
+                              <Navbar color={navigColor} sub={
+                                  <button className="p-1 text-[13px] w-[130px] rounded-full border border-1 font-bold border-[#878787]">
+                                      <i className="fa-solid fa-circle-arrow-down"></i><span> Installer l'appli </span>
+                                  </button>
+                              } />
+                          </div>
+                          <Component {...pageProps}
+                                     singer={singer} greatPlay={greatPlay} handleCurrentPlayList={handleCurrentPlayList} 
+                                     handleFindPlayListCover={handleFindPlayListCover} setNavigColor={setNavigColor}
+                          />
+                      </div>
+                  </div>
+              </div>
+              <div className='bg-white h-[10vh]'>
+                  {currentMusic != null?
+                      <Footer img={currentMusic.cover} handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} isRepeat={isRepeat}
+                              audio={audio} titre={currentMusic.title} artist={currentMusic.artist} playTime={playTime}
+                              handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay}
+                              gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
+                              handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
+                              setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
+                              handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay} handleRepeat={handleRepeat}
+                      />
+                      :
+                      <Footer img="" handleOnPause={handleOnPause} handleOnPlay={handleOnPlay} titre='-----:-----' audio={audio}
+                              handlePlayUp={handlePlayUp} handlePlayMove={handlePlayMove} setColorPlay={setColorPlay} isRepeat={isRepeat}
+                              gradientPlay={gradientPlay} colorPlay={colorPlay} durationTime={durationTime} handleVolumeUp={handleVolumeUp}
+                              handleVolumeMove={handleVolumeMove} setColor={setColor} gradient={gradient} color={color} isPlay={isPlay}
+                              artist='---:---' setPlayLength={setPlayLength} setSoundLength={setSoundLength} setPlayX={setPlayX} setVolumeX={setVolumeX}
+                              handleNextPlay={handleNextPlay} handlePreviewPlay={handlePreviewPlay} handleRepeat={handleRepeat}
+                      />
+                  }
+              </div>
+          </div>
+      </div>
+    )
 }
 
 export default MyApp
