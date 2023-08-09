@@ -236,7 +236,7 @@ function MyApp({ Component, pageProps }) {
                       <div id='scrolling' className='grid mt-1 p-2 max-h-[88vh] bg-[#191919] rounded-md overflow-y-scroll'>
                           <div className="w-[72%] h-[50px] my-[-8px] fixed">
                               <Navbar color={navigColor} sub={
-                                  <button className="p-1 text-[13px] w-[130px] rounded-full border border-1 font-bold border-[#878787]">
+                                  <button className="p-1 text-[13px] w-[130px] rounded-full bg-black border border-1 font-bold border-[#878787]">
                                       <i className="fa-solid fa-circle-arrow-down"></i><span> Installer l'appli </span>
                                   </button>
                               } />
@@ -244,6 +244,7 @@ function MyApp({ Component, pageProps }) {
                           <Component {...pageProps}
                                      singer={singer} greatPlay={greatPlay} handleCurrentPlayList={handleCurrentPlayList} 
                                      handleFindPlayListCover={handleFindPlayListCover} setNavigColor={setNavigColor}
+                                     currentPlaylist={currentPlayList}
                           />
                       </div>
                   </div>

@@ -17,7 +17,7 @@ export default function Navbar(props) {
                 <Menu>
                     <Menu.Button>
                         <div className="m-0">
-                            <p className="p-2 mx-2 rounded-full font-bold bg-[#000000]"><i
+                            <p className="p-2 mx-2 rounded-full bg-black font-bold"><i
                                 className="fa-regular fa-user text-[1.2em] mx-1"></i></p>
                         </div>
                     </Menu.Button>
