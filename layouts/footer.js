@@ -6,10 +6,10 @@ import {
 } from "@icon-park/react";
 import {useEffect, useState} from "react";
 
-export default function Footer({img, titre, artist, isPlay, handleOnPlay, handleOnPause, playTime, 
-                                   handlePlayUp, colorPlay, handlePlayMove, setColorPlay,durationTime,
-                                   gradientPlay, handleVolumeUp, handleVolumeMove, gradient, setColor, color,
-                                   setPlayLength, setSoundLength, setPlayX, setVolumeX, audio
+export default function Footer({img, titre, artist, isPlay, handleOnPlay, handleOnPause, playTime, handlePreviewPlay, 
+                                   handlePlayUp, colorPlay, handlePlayMove, setColorPlay,durationTime, handleRepeat,
+                                   gradientPlay, handleVolumeUp, handleVolumeMove, gradient, setColor, color, isRepeat,
+                                   setPlayLength, setSoundLength, setPlayX, setVolumeX, audio, handleNextPlay
 }) {
     
     useEffect(() => {
@@ -41,15 +41,19 @@ export default function Footer({img, titre, artist, isPlay, handleOnPlay, handle
             </div>
             <div className="mx-1 p-1 w-full grid">
                 <div className="flex justify-center">
-                    <Shuffle size={16} className="mx-4 mt-2 text-[#b3b3b3]" />
-                    <i className="fa-solid fa-backward-step text-[16px] mt-2"></i>
+                    <Shuffle title={""} size={16} className="mx-4 mt-2 text-[#b3b3b3]" />
+                    <i title={"Précédent"} onClick={handlePreviewPlay} className="fa-solid fa-backward-step text-[16px] mt-2"></i>
                     {!isPlay?
-                        <i id={'playButton'} onClick={() => handleOnPlay(audio)} className="fa-solid fa-circle-play text-[30px] mx-4 p-1"></i>
+                        <i title={"Pause"} id={'playButton'} onClick={() => handleOnPlay(audio)} className="fa-solid fa-circle-play text-[30px] mx-4 p-1"></i>
                     :
-                        <i onClick={handleOnPause} className="fa-solid fa-circle-pause text-[30px] mx-4 p-1"></i>
+                        <i title={"Lecture"} onClick={handleOnPause} className="fa-solid fa-circle-pause text-[30px] mx-4 p-1"></i>
                     }
-                    <i className="fa-solid fa-forward-step text-[16px] mt-2"></i>
-                    <i className="fa-solid fa-repeat text-[16px] mx-4 mt-2 text-[#b3b3b3]"></i>
+                    <i title={"Suivant"} onClick={handleNextPlay} className="fa-solid fa-forward-step text-[16px] mt-2"></i>
+                    {isRepeat?
+                        <i title={"Désactiver la répétition"} onClick={handleRepeat} className="fa-solid fa-repeat text-[16px] mx-4 mt-2 text-[#1ED760]"></i>
+                        :
+                        <i title={"Activer la répétition"} onClick={handleRepeat} className="fa-solid fa-repeat text-[16px] mx-4 mt-2 text-[#b3b3b3]"></i>
+                    }
                 </div>
                 <div className="flex justify-center" style={{fontSize: '12px', color: "#b3b3b3"}}>
                     <span className='mx-1'>{playTime}</span>
