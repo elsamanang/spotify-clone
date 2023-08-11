@@ -33,6 +33,18 @@ function MyApp({ Component, pageProps }) {
     const [greatPlay, setGreatPlay] = useState([
         playlist[0], preferlist[1], dailylist[2], sounds[3]
     ])
+    
+    useEffect(() => {
+        window.onscroll = function () {
+            document.body.style.scrollbarColor = '#000000 yellow';
+            if (document.body.scrollTop >= 3 || document.documentElement.scrollTop >= 3) {
+                setNavigColor("bg-[#000000]");
+            }
+            else {
+                setNavigColor("");
+            }
+        };
+    }, [])
     const handleNextPlay = () => {
         if (audio) {
             if(isRepeat) {

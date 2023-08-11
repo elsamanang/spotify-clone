@@ -159,7 +159,7 @@ export const playlist = [
     {
         id: 2,
         title: "Pop Culture",
-        musics: [4, 7, 1, 5, 9]
+        musics: [4, 7, 1, 5, 9, 2]
     },
     {
         id: 3,
