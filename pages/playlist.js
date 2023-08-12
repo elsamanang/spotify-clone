@@ -4,28 +4,50 @@ import {Logout, PlayOne} from "@icon-park/react";
 import {Menu} from '@headlessui/react'
 import {playlist, musics, artists} from "../data/music";
 
-export default function Playlist({currentPlayList }) {
-    currentPlayList = playlist[1];
+export default function Playlist({timer, setNavigColor}) {
+    const [currentPlayList, setCurrentPlayList] = useState(playlist[1]);
     const [covers, setCovers] = useState([]);
+    const [musiks, setMusiks] = useState([]);
         
     useEffect(() => {
-        const covers = [];
-        let i = 0;
-        currentPlayList.musics.map(sound => {
-            if(i > 3) {
-                return;
+        document.getElementById("scrolling").addEventListener("scroll", event => {
+            if(document.getElementById("scrolling").scrollTop >3 ) {
+                setNavigColor("bg-[#191919]");
             }
+            else {
+                setNavigColor("");
+            }
+        });
+        
+        const covers = [];
+        const musiks = [];
+        let i = 0;
+        
+        currentPlayList.musics.map(sound => {
             const findSound = musics.find(item => item.id === sound);
-            covers.push(findSound.cover);
+            if(i < 4) {
+                covers.push(findSound.cover);
+            }
+            const getSound = new Audio(findSound.src);
+            const album = findSound.title.split(" ");
+            console.log(getSound)
+            musiks.push({
+                number: i+1,
+                cover: findSound.cover,
+                artist: "",
+                title: findSound.title,
+                duration: getSound,
+                album: album[album.length-1]
+            })
             i ++;
             
         })
-        
+        setMusiks(musiks)
         setCovers(covers);
     }, [])
     //console.log(currentPlayList)
     return(
-       <div className="text-white pt-2 pb-2 px-6 h-full bg-gradient-to-b from-indigo-500 from-10% to-bg-transparent to-90%">
+       <div className="text-white pt-2 pb-2 px-6 h-full bg-gradient-to-b from-indigo-500 from-5% via-transparent via-30% to-bg-transparent to-65%">
            <div className='flex mt-12 my-5 mb-8 p-2'>
                <div className='m-1 mt-4 grid grid-cols-2 shadow-lg'>
                    {covers.map(cover =>
@@ -93,26 +115,28 @@ export default function Playlist({currentPlayList }) {
                    </p>
                </div>
                <div className='bg-[#b3b3b3] w-[100%] h-[1px] m-1'></div>
-               <div className='flex group p-1 mx-1 text-[#b3b3b3] text-[14px] rounded hover:bg-[#3a3a3a]'>
-                   <div className='flex py-1 w-[34%] group-hover:text-[#ffffff]'>
-                       <p className='mx-4'>
-                           <span className='visible group-hover:invisible'>1</span>
-                           <span><i className="fa-solid invisible group-hover:visible fa-play"></i></span>
-                       </p>
-                       <Image className='w-[44px] h-[44px] shadow-full' src={'/covers/cover3.jpg'} alt="" height={44} width={44} />
-                       <div className='mx-4 text-[16px]'>
-                           <p className='text-[#ffffff] font-medium'>titre</p>
-                           <p>Artiste</p>
+               {musiks.map(musik => 
+                   <div key={musik.number} className='flex group p-1 mx-1 text-[#b3b3b3] text-[14px] rounded hover:bg-[#3a3a3a]'>
+                       <div className='flex py-1 w-[34%] group-hover:text-[#ffffff]'>
+                           <p className='mx-4'>
+                               <span className='visible group-hover:invisible'>{musik.number}</span>
+                               <span><i className="fa-solid invisible group-hover:visible fa-play"></i></span>
+                           </p>
+                           <Image className='w-[44px] h-[44px] shadow-full' src={musik.cover} alt="" height={44} width={44} />
+                           <div className='mx-4 text-[16px]'>
+                               <p className='text-[#ffffff] font-medium'>{musik.title}</p>
+                               <p>Artiste</p>
+                           </div>
+                       </div>
+                       <p className='w-[25%] group-hover:text-[#ffffff] mt-4'>{musik.album}</p>
+                       <p className='w-[25%] mt-4'>16 oct, 2023</p>
+                       <div className='flex mt-4'>
+                           <i className="fa-regular fa-heart mx-4 invisible group-hover:visible"></i>
+                           <p className='mx-4'>4:00</p>
+                           <i className="fa-solid fa-ellipsis text-[#ffffff] mx-2 invisible group-hover:visible"></i>
                        </div>
                    </div>
-                   <p className='w-[25%] group-hover:text-[#ffffff] mt-4'>Album</p>
-                   <p className='w-[25%] mt-4'>16 oct, 2023</p>
-                   <div className='flex mt-4'>
-                       <i className="fa-regular fa-heart mx-4 invisible group-hover:visible"></i>
-                       <p className='mx-4'>4:00</p>
-                       <i className="fa-solid fa-ellipsis text-[#ffffff] mx-2 invisible group-hover:visible"></i>
-                   </div>
-               </div>
+               )}
            </div>
        </div>
     )
