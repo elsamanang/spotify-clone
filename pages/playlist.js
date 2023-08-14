@@ -8,6 +8,20 @@ export default function Playlist({timer, setNavigColor}) {
     const [currentPlayList, setCurrentPlayList] = useState(playlist[1]);
     const [covers, setCovers] = useState([]);
     const [musiks, setMusiks] = useState([]);
+    const [duration, setDuration] = useState(0);
+    
+    const handleDuree = (src, i) => {
+        const mus = new Audio(src);
+        var dur = 0;
+        const duration = [];
+        mus.addEventListener("loadedmetadata", function(_event) {
+            dur = mus.duration;
+            duration.push(timer(dur));
+            setDuration(duration);
+        })
+        
+        return duration;
+    }
         
     useEffect(() => {
         document.getElementById("scrolling").addEventListener("scroll", event => {
@@ -28,15 +42,15 @@ export default function Playlist({timer, setNavigColor}) {
             if(i < 4) {
                 covers.push(findSound.cover);
             }
-            const getSound = new Audio(findSound.src);
+            
             const album = findSound.title.split(" ");
-            console.log(getSound)
+            
             musiks.push({
                 number: i+1,
                 cover: findSound.cover,
                 artist: "",
                 title: findSound.title,
-                duration: getSound,
+                duration: handleDuree(findSound.src),
                 album: album[album.length-1]
             })
             i ++;
@@ -45,7 +59,7 @@ export default function Playlist({timer, setNavigColor}) {
         setMusiks(musiks)
         setCovers(covers);
     }, [])
-    //console.log(currentPlayList)
+    
     return(
        <div className="text-white pt-2 pb-2 px-6 h-full bg-gradient-to-b from-indigo-500 from-5% via-transparent via-30% to-bg-transparent to-65%">
            <div className='flex mt-12 my-5 mb-8 p-2'>
@@ -132,7 +146,7 @@ export default function Playlist({timer, setNavigColor}) {
                        <p className='w-[25%] mt-4'>16 oct, 2023</p>
                        <div className='flex mt-4'>
                            <i className="fa-regular fa-heart mx-4 invisible group-hover:visible"></i>
-                           <p className='mx-4'>4:00</p>
+                           <p className='mx-4'>{musik.duration}</p>
                            <i className="fa-solid fa-ellipsis text-[#ffffff] mx-2 invisible group-hover:visible"></i>
                        </div>
                    </div>

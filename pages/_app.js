@@ -33,10 +33,6 @@ function MyApp({ Component, pageProps }) {
     const [greatPlay, setGreatPlay] = useState([
         playlist[0], preferlist[1], dailylist[2], sounds[3]
     ])
-    
-    //useEffect(() => {
-        
-    //}, [])
     const handleNextPlay = () => {
         if (audio) {
             if(isRepeat) {
