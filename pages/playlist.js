@@ -132,7 +132,7 @@ export default function Playlist({timer, setNavigColor}) {
                {musiks.map(musik => 
                    <div key={musik.number} className='flex group p-1 mx-1 text-[#b3b3b3] text-[14px] rounded hover:bg-[#3a3a3a]'>
                        <div className='flex py-1 w-[34%] group-hover:text-[#ffffff]'>
-                           <p className='mx-4'>
+                           <p className='mx-4 mt-3'>
                                <span className='visible group-hover:invisible'>{musik.number}</span>
                                <span><i className="fa-solid invisible group-hover:visible fa-play"></i></span>
                            </p>
