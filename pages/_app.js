@@ -177,7 +177,7 @@ function MyApp({ Component, pageProps }) {
     const timer = (duration) => {
         let minute = ~~(duration/60);
         let seconde = parseInt(duration % 60);
-        let response = seconde > 10 ?`${minute}:${seconde}`: `${minute}:0${seconde}`;
+        let response = seconde > 9 ?`${minute}:${seconde}`: `${minute}:0${seconde}`;
         return(response);
     }
     const handleFindPlayListCover = (id) => {
