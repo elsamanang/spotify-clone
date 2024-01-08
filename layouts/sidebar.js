@@ -18,11 +18,11 @@ export default function Sidebar() {
     return(
         <div className="grid grid-cols-1 w-[100%] p-1">
             <div className={'grid my-1 bg-[#191919] text-[#b3b3b3] font-bold rounded-md'}>
-                <Link href='/home'><div className='flex m-3'>
+                <Link href='/'><div className='flex m-3'>
                     <i className="fa-solid fa-house text-[24px] mx-2"></i>
                     <h2 className='mx-2 py-1 text-[1em]'>Acceuil</h2>
                 </div></Link>
-                <Link href='/recherche'>
+                <Link href='#'>
                     <div className='flex m-3'>
                         <i className="fa-solid fa-magnifying-glass text-[24px] mx-2"></i>
                         <h2 className='mx-2 py-1 text-[1em]'>Recherche</h2>
