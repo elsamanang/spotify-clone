@@ -1,4 +1,3 @@
-
 import styles from '../styles/Home.module.css'
 import Navbar from '../layouts/navbar'
 import Sidebar from '../layouts/sidebar'
